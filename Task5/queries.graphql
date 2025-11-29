@@ -1,0 +1,96 @@
+# Запрос 1: Получить базовую информацию о клиенте
+query GetClientBasicInfo($clientId: String!) {
+  client(id: $clientId) {
+    id
+    name
+    age
+  }
+}
+
+# Запрос 2: Получить полную информацию о клиенте с документами и родственниками
+query GetClientFullInfo($clientId: String!) {
+  client(id: $clientId) {
+    id
+    name
+    age
+  }
+  clientDocuments(id: $clientId) {
+    id
+    type
+    number
+    issueDate
+    expiryDate
+  }
+  clientRelatives(id: $clientId) {
+    id
+    relationType
+    name
+    age
+  }
+}
+
+# Запрос 3: Получить только документы клиента
+query GetClientDocuments($clientId: String!) {
+  clientDocuments(id: $clientId) {
+    id
+    type
+    number
+    issueDate
+  }
+}
+
+# Запрос 4: Получить только родственников клиента
+query GetClientRelatives($clientId: String!) {
+  clientRelatives(id: $clientId) {
+    id
+    relationType
+    name
+    age
+  }
+}
+
+# Запрос 5: Получить информацию о клиенте и его документах (без родственников)
+query GetClientWithDocuments($clientId: String!) {
+  client(id: $clientId) {
+    id
+    name
+    age
+  }
+  clientDocuments(id: $clientId) {
+    id
+    type
+    number
+    issueDate
+    expiryDate
+  }
+}
+
+# Запрос 6: Минимальная информация о документах (только тип и номер)
+query GetClientDocumentsMinimal($clientId: String!) {
+  clientDocuments(id: $clientId) {
+    type
+    number
+  }
+}
+
+# Запрос 7: Проверить существование клиента и получить его возраст
+query CheckClientExists($clientId: String!) {
+  client(id: $clientId) {
+    id
+    name
+    age
+  }
+}
+
+# Запрос 8: Получить структуру семьи клиента
+query GetClientFamily($clientId: String!) {
+  client(id: $clientId) {
+    name
+    age
+  }
+  clientRelatives(id: $clientId) {
+    relationType
+    name
+    age
+  }
+}
